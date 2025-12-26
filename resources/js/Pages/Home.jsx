@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
 import ProductCard from '@/Components/ProductCard';
 import CategoryCard from '@/Components/CategoryCard';
-import MenuSection from '@/Components/MenuSection';
+
 import CartSidebar from '@/Components/CartSidebar';
 import { useCart } from '@/Hooks/useCart';
 
@@ -304,8 +304,7 @@ export default function Home({ auth }) {
                 </div>
             </div>
 
-            {/* Menu Section */}
-            <MenuSection />
+
 
             {/* Newsletter */}
             <div className="bg-white border-t border-gray-100 py-20">

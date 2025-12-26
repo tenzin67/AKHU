@@ -14,11 +14,7 @@ export default function Checkout({ auth }) {
         phone: '',
         address: '',
         city: '',
-        zip: '',
-        cardName: '',
-        cardNumber: '',
-        expDate: '',
-        cvv: ''
+        zip: ''
     });
 
     const handleChange = (e) => {
@@ -131,30 +127,15 @@ export default function Checkout({ auth }) {
                             {/* Payment */}
                             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                                 <h2 className="text-xl font-bold mb-6">Payment Details</h2>
-                                <div className="space-y-6">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
-                                        <input
-                                            required placeholder="0000 0000 0000 0000" name="cardNumber" value={formData.cardNumber} onChange={handleChange}
-                                            className="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-6">
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
-                                            <input
-                                                required placeholder="MM/YY" name="expDate" value={formData.expDate} onChange={handleChange}
-                                                className="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-2">CVV</label>
-                                            <input
-                                                required placeholder="123" name="cvv" value={formData.cvv} onChange={handleChange}
-                                                className="w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary"
-                                            />
-                                        </div>
-                                    </div>
+                                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+                                    <p className="font-bold mb-1">Payment Gateway Required</p>
+                                    <p>
+                                        To ensure top security, please integrate a secure payment gateway like Stripe or PayPal.
+                                        Do not enter real credit card information here.
+                                    </p>
+                                </div>
+                                <div className="mt-6 p-6 border-2 border-dashed border-gray-200 rounded-xl text-center text-gray-400">
+                                    Secure Payment Form Placeholder
                                 </div>
                             </div>
 

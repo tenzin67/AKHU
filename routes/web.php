@@ -22,26 +22,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::get('/shop', function () {
-    return Inertia::render('Shop');
-});
+    Route::get('/checkout', function () {
+        return Inertia::render('Checkout');
+    });
 
-Route::get('/cafe', function () {
-    return Inertia::render('Cafe');
-});
-
-Route::get('/about', function () {
-    return Inertia::render('About');
-});
-
-Route::get('/checkout', function () {
-    return Inertia::render('Checkout');
-});
-
-Route::get('/order-success', function () {
-    return Inertia::render('OrderSuccess');
+    Route::get('/order-success', function () {
+        return Inertia::render('OrderSuccess');
+    });
 });
 
 require __DIR__ . '/auth.php';
