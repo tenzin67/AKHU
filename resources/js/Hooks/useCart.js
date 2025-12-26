@@ -1,31 +1,46 @@
 import { useState, useEffect } from 'react';
+import { usePage } from '@inertiajs/react';
 
-const CART_STORAGE_KEY = 'akhu_cart';
+const STORAGE_PREFIX = 'akhu_cart';
 
 export function useCart() {
+    const { props } = usePage();
+    const user = props.auth?.user;
+    
+    // Determine the storage key based on the user
+    // If logged in: akhu_cart_user_{id}
+    // If guest: akhu_cart_guest
+    const cartKey = user ? `${STORAGE_PREFIX}_user_${user.id}` : `${STORAGE_PREFIX}_guest`;
+
     const [cart, setCart] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
 
-    // Load from local storage on mount
+    // Load from local storage when key changes
     useEffect(() => {
-        const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+        // Reset initialization state when switching keys to prevent saving empty state to wrong key
+        setIsInitialized(false);
+        
+        const savedCart = localStorage.getItem(cartKey);
         if (savedCart) {
             try {
                 setCart(JSON.parse(savedCart));
             } catch (e) {
                 console.error('Failed to parse cart JSON', e);
+                setCart([]);
             }
+        } else {
+            setCart([]);
         }
         setIsInitialized(true);
-    }, []);
+    }, [cartKey]);
 
     // Save to local storage whenever cart changes
     useEffect(() => {
         if (isInitialized) {
-            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+            localStorage.setItem(cartKey, JSON.stringify(cart));
         }
-    }, [cart, isInitialized]);
+    }, [cart, isInitialized, cartKey]);
 
     const addToCart = (product) => {
         setCart(prevCart => {
